@@ -1,9 +1,9 @@
+local utils = require("gtkadapt.utils.dbus")
 local M = {}
 
 function M.setup()
-   vim.keymap.set("n", "<Leader>v", function()
-         vim.notify("hello")
-   end)
+  utils.setup_connection()
+  utils.send_and_receive()
 end
 
 return M
