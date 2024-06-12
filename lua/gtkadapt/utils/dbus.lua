@@ -4,11 +4,10 @@ local connection = nil
 
 
 M.setup_connection = function ()
-  connection = assert (ldbus.bus.get ("session"))
+  connection = assert(ldbus.bus.get("session"))
 end
 
--- TODO: Make async
-M.send_and_receive = function ()
+M.get_theme_value = function ()
   if not connection then
     M.setup_connection()
   end
@@ -36,8 +35,8 @@ M.send_and_receive = function ()
 	local sub_sub_iter = ldbus.message.iter.new ( )
 	assert(subiter:recurse(sub_sub_iter), "sub-iter not recursable")
 	local theme_value = sub_sub_iter:get_basic()
-  vim.notify("" .. theme_value)
 
+  return theme_value
 end
 
 return M
