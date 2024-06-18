@@ -2,7 +2,7 @@
 
 This plugin aims to bring toggling between light and dark mode to neovim.  
 
-The code is heavily based on https://github.com/Sewdohe/Nvim-Adapt.
+ldbus code is heavily based on https://github.com/Sewdohe/Nvim-Adapt.
 
 ## Installation
 
@@ -12,7 +12,13 @@ Add this to your lazy config, read the docs for luarocks and ldbus.
 {
   "baltevl/gtkadapt.nvim",
   lazy = false, -- 
-  opts = {},
+  opts = {
+  themes = {
+    light = "astrolight",
+    dark = "astrodark"
+  },
+  refreshrate = 1000 -- millisecs
+  },
   dependencies = {
      {
         "vhyrro/luarocks.nvim",
@@ -38,3 +44,6 @@ I also had to make some modifications to luarocks rocks.lua file:
 		paths.rockspec,
 	})
 ```
+
+## Future plans
+Reimplement dbus messaging using `gsettings get` or similar to get rid of dependencies
