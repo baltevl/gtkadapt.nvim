@@ -8,22 +8,27 @@ return {
       return nil
     end
 
-    uv.timer_start(timer, 0, refreshrate, vim.schedule_wrap(function ()
-      if not themes then
-        return nil
-      end
+    uv.timer_start(
+      timer,
+      0,
+      refreshrate,
+      vim.schedule_wrap(function()
+        if not themes then
+          return nil
+        end
 
-      local theme
-	    if dbus.get_theme_value() == 1 then
-	      theme = themes.dark
-	    else
-	      theme = themes.light
-	    end
+        local theme
+        if dbus.get_theme_value() == 1 then
+          theme = themes.dark
+        else -- 0 or -1
+          theme = themes.light
+        end
 
-      if not (theme == current_theme) then
-        current_theme = theme
-	      vim.cmd.colorscheme(theme)
-	    end
-    end))
-  end
+        if not (theme == current_theme) then
+          current_theme = theme
+          vim.cmd.colorscheme(theme)
+        end
+      end)
+    )
+  end,
 }
